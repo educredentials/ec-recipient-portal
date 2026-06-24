@@ -7,8 +7,8 @@
 
 body {
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
-    background-color: #f5f7fa;
-    color: #333;
+    background-color: #ffffff;
+    color: #0a0a0a;
 }
 
 /* Layout */
@@ -20,8 +20,8 @@ body {
 /* Sidebar */
 .sidebar {
     width: 250px;
-    background-color: #2c3e50;
-    color: #ecf0f1;
+    background-color: #0a0a0a;
+    color: #ffffff;
     padding: 20px 0;
 }
 
@@ -46,8 +46,8 @@ body {
 }
 
 .sidebar-nav li.active {
-    background-color: #3498db;
-    border-right: 3px solid #f1c40f;
+    background-color: #772583;
+    border-right: 3px solid #772583;
 }
 
 .sidebar-nav li i {
@@ -65,8 +65,8 @@ body {
 
 /* Top Bar */
 .topbar {
-    background-color: #fff;
-    border-bottom: 1px solid #e0e0e0;
+    background-color: #ffffff;
+    border-bottom: 1px solid #939393;
     padding: 15px 30px;
     display: flex;
     justify-content: space-between;
@@ -77,7 +77,7 @@ body {
 .topbar-logo {
     font-size: 20px;
     font-weight: 600;
-    color: #2c3e50;
+    color: #0a0a0a;
 }
 
 .topbar-user {
@@ -90,7 +90,7 @@ body {
     width: 40px;
     height: 40px;
     border-radius: 50%;
-    background: linear-gradient(135deg, #3498db, #2c3e50);
+    background: linear-gradient(135deg, #772583, #0a0a0a);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -100,14 +100,14 @@ body {
 
 .topbar-user-name {
     font-weight: 500;
-    color: #2c3e50;
+    color: #0a0a0a;
 }
 
 /* Page Content */
 .page-content {
     flex: 1;
     padding: 30px;
-    background-color: #f9f9f9;
+    background-color: #ffffff;
 }
 
 /* Breadcrumb */
@@ -117,35 +117,36 @@ body {
     gap: 8px;
     margin-bottom: 30px;
     font-size: 14px;
-    color: #666;
+    color: #939393;
 }
 
 .breadcrumb span {
-    color: #3498db;
+    color: #772583;
 }
 
 .breadcrumb i {
-    color: #999;
+    color: #939393;
 }
 
 /* Achievement Card */
 .achievement-placeholder {
-    background-color: #fff;
+    background-color: #ffffff;
     border-radius: 12px;
     padding: 40px;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
     text-align: center;
     max-width: 600px;
     margin: 0 auto;
+    border: 1px solid #f6f0f9;
 }
 
 .achievement-placeholder h2 {
-    color: #2c3e50;
+    color: #0a0a0a;
     margin-bottom: 10px;
 }
 
 .achievement-placeholder p {
-    color: #7f8c8d;
+    color: #939393;
     margin-bottom: 30px;
 }
 
@@ -153,21 +154,21 @@ body {
     width: 120px;
     height: 120px;
     margin: 0 auto;
-    background-color: #ecf0f1;
+    background-color: #f6f0f9;
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
-    border: 4px dashed #bdc3c7;
+    border: 4px dashed #939393;
 }
 
 .badge-placeholder i {
     font-size: 48px;
-    color: #95a5a6;
+    color: #939393;
 }
 
 .placeholder-text {
     margin-top: 20px;
     font-style: italic;
-    color: #95a5a6;
+    color: #939393;
 }
