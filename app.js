@@ -13,6 +13,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     let qrTimer;
     let currentQRUri = '';
+    const awardId = 'award-123';
 
     // Function to show error modal
     function showError(error) {
@@ -28,8 +29,8 @@ document.addEventListener('DOMContentLoaded', function() {
         clearInterval(qrTimer);
     }
 
-    // Function to load QR code content from API
-    async function loadQRContent(awardId) {
+    // Function to load QR code content from API and regenerate QR
+    async function loadAndGenerateQR() {
         try {
             const response = await fetch('http://localhost:8000/api/v1/offers', {
                 method: 'POST',
@@ -48,47 +49,33 @@ document.addEventListener('DOMContentLoaded', function() {
             
             const data = await response.json();
             currentQRUri = data.uri;
-            return data.uri;
+            
+            // Regenerate QR code with new URI
+            qrcodeContainer.innerHTML = '';
+            new QRCode(qrcodeContainer, {
+                text: currentQRUri,
+                width: 200,
+                height: 200,
+                colorDark: '#0a0a0a',
+                colorLight: '#ffffff',
+                correctLevel: QRCode.CorrectLevel.H
+            });
         } catch (error) {
             console.error('Error loading QR content:', error);
             showError(error);
-            throw error; // Re-throw to prevent continuing
+            walletModal.style.display = 'none';
         }
-    }
-
-    // Function to generate QR code
-    function generateQRCode() {
-        if (!currentQRUri) return;
-        
-        qrcodeContainer.innerHTML = '';
-        new QRCode(qrcodeContainer, {
-            text: currentQRUri,
-            width: 200,
-            height: 200,
-            colorDark: '#0a0a0a',
-            colorLight: '#ffffff',
-            correctLevel: QRCode.CorrectLevel.H
-        });
     }
 
     // Open modal and load QR content
-    btn.onclick = async function() {
+    btn.onclick = function() {
         walletModal.style.display = 'flex';
         
-        try {
-            // Load QR content from API
-            const awardId = 'award-123';
-            await loadQRContent(awardId);
-            
-            // Generate initial QR code
-            generateQRCode();
-            
-            // Start timer to regenerate QR every 10 seconds
-            qrTimer = setInterval(generateQRCode, 10000);
-        } catch (error) {
-            // Error is already shown by loadQRContent, just close wallet modal
-            walletModal.style.display = 'none';
-        }
+        // Initial load
+        loadAndGenerateQR();
+        
+        // Start timer to re-fetch and regenerate QR every 10 seconds
+        qrTimer = setInterval(loadAndGenerateQR, 10000);
     };
 
     // Close modals when clicking the X
