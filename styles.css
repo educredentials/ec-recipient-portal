@@ -253,3 +253,127 @@ body {
     font-size: 14px;
     text-align: center;
 }
+
+/* Achievement Container */
+.achievement-container {
+    display: flex;
+    gap: 30px;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.achievement-main {
+    flex: 1;
+}
+
+.achievement-sidebar {
+    width: 280px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+/* Action Buttons */
+.action-buttons {
+    display: flex;
+    gap: 10px;
+}
+
+.btn {
+    padding: 10px 16px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 500;
+    transition: opacity 0.2s;
+}
+
+.btn:hover {
+    opacity: 0.9;
+}
+
+.btn-primary {
+    background-color: #772583;
+    color: #ffffff;
+}
+
+.btn-secondary {
+    background-color: #f6f0f9;
+    color: #0a0a0a;
+    border: 1px solid #939393;
+}
+
+/* Dropdown */
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #ffffff;
+    min-width: 120px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    border-radius: 6px;
+    z-index: 1;
+    border: 1px solid #f6f0f9;
+}
+
+.dropdown-content a {
+    color: #0a0a0a;
+    padding: 8px 12px;
+    text-decoration: none;
+    display: block;
+}
+
+.dropdown-content a:hover {
+    background-color: #f6f0f9;
+}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+/* Timeline - Metro Map Style */
+.timeline {
+    margin-top: 20px;
+}
+
+.timeline-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    margin-bottom: 15px;
+    position: relative;
+}
+
+.timeline-item:not(:last-child)::before {
+    content: '';
+    position: absolute;
+    left: 8px;
+    top: 24px;
+    bottom: -15px;
+    width: 2px;
+    background-color: #772583;
+    z-index: 0;
+}
+
+.timeline-dot {
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background-color: #772583;
+    border: 3px solid #ffffff;
+    flex-shrink: 0;
+    margin-top: 4px;
+    position: relative;
+    z-index: 1;
+}
+
+.timeline-content {
+    font-size: 14px;
+    color: #0a0a0a;
+    line-height: 1.5;
+}
