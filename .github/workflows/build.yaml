@@ -1,0 +1,65 @@
+##
+# Builds a static file server with static assets to serve
+# and pushes it to cr.surf.nl
+#
+# - Uses our own Dockerfile so we copy in static assets
+#
+# Required secrets:
+#   - CR_SURF_USERNAME: Username for cr.surf.nl registry
+#   - CR_SURF_PASSWORD: Password for cr.surf.nl registry
+#
+
+name: Build EC recipient portal
+
+on:
+  push:
+    branches: [main]
+    tags: ["*"]
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build-vc-service-local:
+    name: "Build EC recipient portal"
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout with submodules
+        uses: actions/checkout@v6
+        with:
+          submodules: recursive
+
+      - name: Log in to SDP Container Registry "Harbor"
+        uses: docker/login-action@f4ef78c080cd8ba55a85445d5b36e214a81df20a
+        with:
+          registry: cr.surf.nl
+          username: ${{ secrets.CR_SURF_USERNAME }}
+          password: ${{ secrets.CR_SURF_PASSWORD }}
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v4
+
+      - name: Determine image tag
+        id: tag
+        run: |
+          if [[ "${{ github.ref }}" == refs/tags/* ]]; then
+            # Strip v prefix if present for semver
+            TAG=${{ github.ref_name }}
+            TAG=${TAG#v}
+            echo "tag=${TAG}" >> $GITHUB_OUTPUT
+          else
+            echo "tag=latest" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Build and push Docker image
+        uses: docker/build-push-action@v7
+        with:
+          context: .
+          file: Dockerfile
+          push: true
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
+          tags: |
+            cr.surf.nl/edubadges-educredentials/ec-recipient-portal:${{ steps.tag.outputs.tag }}
+            cr.surf.nl/edubadges-educredentials/ec-recipient-portal:latest
