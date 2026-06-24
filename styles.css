@@ -421,16 +421,22 @@ body {
     flex: 1;
     display: flex;
     flex-direction: column;
-    gap: 10px;
-}
-
-.valid .valid-from,
-.valid .valid-until {
-    display: flex;
-    flex-direction: column;
     align-items: center;
-    padding: 8px 12px;
+    padding: 15px;
     background-color: #f6f0f9;
     border-radius: 6px;
+    gap: 8px;
+}
+
+.valid i.icon {
+    font-size: 32px;
+    color: #28a745;
+    font-style: normal;
+    margin-bottom: 4px;
+}
+
+.valid span {
+    font-size: 14px;
     text-align: center;
+    color: #0a0a0a;
 }
