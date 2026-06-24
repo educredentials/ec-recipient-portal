@@ -205,3 +205,26 @@ body {
     color: #772583;
     opacity: 0.8;
 }
+
+/* Achievement Meta */
+.achievement-meta {
+    display: flex;
+    gap: 20px;
+    margin: 15px auto 20px;
+    max-width: 500px;
+}
+
+.valid-from,
+.issuer {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 12px;
+    background-color: #f6f0f9;
+    border-radius: 6px;
+    font-size: 14px;
+}
+
+.valid-from i {
+    color: #28a745;
+}
