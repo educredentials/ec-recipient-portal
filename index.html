@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Educredentials - My Credentials</title>
     <link rel="stylesheet" href="styles.css">
+    <script src="https://cdn.rawgit.com/davidshimjs/qrcodejs/gh-pages/qrcode.min.js"></script>
 </head>
 <body>
     <div class="app-container">
@@ -71,7 +72,7 @@
                     </div>
                     <aside class="achievement-sidebar">
                         <div class="action-buttons">
-                            <button class="btn btn-primary">Import in wallet</button>
+                            <button id="import-wallet-btn" class="btn btn-primary">Import in wallet</button>
                             <div class="dropdown">
                                 <button class="btn btn-secondary">download <span class="chevron">▼</span></button>
                                 <div class="dropdown-content">
@@ -117,6 +118,16 @@
             </div>
         </main>
     </div>
+    <!-- Wallet Import Modal -->
+    <div id="wallet-modal" class="modal">
+        <div class="modal-content">
+            <span class="modal-close">&times;</span>
+            <h3>Import in Wallet</h3>
+            <div id="qrcode" class="qrcode-container"></div>
+            <p class="modal-text">Scan with credential wallet</p>
+        </div>
+    </div>
+
     <script src="app.js"></script>
 </body>
 </html>
