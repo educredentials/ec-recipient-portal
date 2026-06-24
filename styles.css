@@ -50,10 +50,11 @@ body {
     border-right: 3px solid #772583;
 }
 
-.sidebar-nav li i {
+.sidebar-nav li i.icon {
     margin-right: 10px;
     width: 20px;
     text-align: center;
+    font-style: normal;
 }
 
 /* Main Content */
