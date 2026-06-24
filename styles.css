@@ -440,3 +440,10 @@ body {
     text-align: center;
     color: #0a0a0a;
 }
+
+/* Muted chevron in dropdown button */
+.chevron {
+    color: #939393;
+    font-size: 12px;
+    margin-left: 4px;
+}
