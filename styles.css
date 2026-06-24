@@ -238,18 +238,21 @@ body {
 }
 
 .valid-from i.icon,
-.issuer i.icon {
+.issuer i.icon,
+.valid-until i.icon {
     font-size: 32px;
     margin-bottom: 8px;
     font-style: normal;
 }
 
-.valid-from i.icon {
+.valid-from i.icon,
+.valid-until i.icon {
     color: #28a745;
 }
 
 .valid-from span,
-.issuer span {
+.issuer span,
+.valid-until span {
     font-size: 14px;
     text-align: center;
 }
@@ -349,7 +352,7 @@ body {
     position: relative;
 }
 
-.timeline-item:not(:last-child)::before {
+.timeline-item:not(:last-of-type)::before {
     content: '';
     position: absolute;
     left: 8px;
@@ -376,4 +379,39 @@ body {
     font-size: 14px;
     color: #0a0a0a;
     line-height: 1.5;
+}
+
+/* Timeline Connector - Dotted line */
+.timeline-connector.dotted {
+    position: relative;
+    height: 20px;
+    margin-bottom: 5px;
+}
+
+.timeline-connector.dotted::before {
+    content: '';
+    position: absolute;
+    left: 8px;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background-color: #772583;
+    background-image: linear-gradient(to bottom, #772583 50%, transparent 50%);
+    background-size: 100% 4px;
+    background-repeat: repeat-y;
+    z-index: 0;
+}
+
+/* Muted timeline items */
+.timeline-item.muted .timeline-dot {
+    background-color: #939393;
+    border-color: #f6f0f9;
+}
+
+.timeline-item.muted .timeline-content {
+    color: #939393;
+}
+
+.timeline-item.muted::before {
+    background-color: #939393;
 }
