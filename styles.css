@@ -511,3 +511,20 @@ body {
     font-size: 14px;
     margin: 0;
 }
+
+/* Error Modal */
+.error-content {
+    max-width: 400px;
+}
+
+.error-content h3 {
+    color: #772583;
+    margin-bottom: 15px;
+}
+
+#error-message {
+    color: #0a0a0a;
+    font-size: 14px;
+    line-height: 1.6;
+    margin: 0;
+}

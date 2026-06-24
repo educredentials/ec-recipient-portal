@@ -4,13 +4,29 @@ console.log('Educredentials app initialized');
 
 // Wallet Import Modal
 document.addEventListener('DOMContentLoaded', function() {
-    const modal = document.getElementById('wallet-modal');
+    const walletModal = document.getElementById('wallet-modal');
+    const errorModal = document.getElementById('error-modal');
     const btn = document.getElementById('import-wallet-btn');
-    const closeBtn = document.querySelector('.modal-close');
+    const closeBtns = document.querySelectorAll('.modal-close');
     const qrcodeContainer = document.getElementById('qrcode');
+    const errorMessageEl = document.getElementById('error-message');
 
     let qrTimer;
     let currentQRUri = '';
+
+    // Function to show error modal
+    function showError(error) {
+        const message = error.message || 'A generic error occurred';
+        errorMessageEl.textContent = message;
+        errorModal.style.display = 'flex';
+    }
+
+    // Function to close all modals
+    function closeAllModals() {
+        walletModal.style.display = 'none';
+        errorModal.style.display = 'none';
+        clearInterval(qrTimer);
+    }
 
     // Function to load QR code content from API
     async function loadQRContent(awardId) {
@@ -25,7 +41,9 @@ document.addEventListener('DOMContentLoaded', function() {
             });
             
             if (!response.ok) {
-                throw new Error('Failed to load QR content');
+                const errorData = await response.json().catch(() => ({}));
+                const errorMsg = errorData.error || errorData.message || 'Request failed';
+                throw new Error(errorMsg);
             }
             
             const data = await response.json();
@@ -33,9 +51,8 @@ document.addEventListener('DOMContentLoaded', function() {
             return data.uri;
         } catch (error) {
             console.error('Error loading QR content:', error);
-            // Fallback to hardcoded value if API fails
-            currentQRUri = 'foo://bar?baz=value';
-            return currentQRUri;
+            showError(error);
+            throw error; // Re-throw to prevent continuing
         }
     }
 
@@ -56,30 +73,33 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Open modal and load QR content
     btn.onclick = async function() {
-        modal.style.display = 'flex';
+        walletModal.style.display = 'flex';
         
-        // Load QR content from API
-        const awardId = 'award-123';
-        await loadQRContent(awardId);
-        
-        // Generate initial QR code
-        generateQRCode();
-        
-        // Start timer to regenerate QR every 10 seconds
-        qrTimer = setInterval(generateQRCode, 10000);
+        try {
+            // Load QR content from API
+            const awardId = 'award-123';
+            await loadQRContent(awardId);
+            
+            // Generate initial QR code
+            generateQRCode();
+            
+            // Start timer to regenerate QR every 10 seconds
+            qrTimer = setInterval(generateQRCode, 10000);
+        } catch (error) {
+            // Error is already shown by loadQRContent, just close wallet modal
+            walletModal.style.display = 'none';
+        }
     };
 
-    // Close modal when clicking the X
-    closeBtn.onclick = function() {
-        modal.style.display = 'none';
-        clearInterval(qrTimer);
-    };
+    // Close modals when clicking the X
+    closeBtns.forEach(function(btn) {
+        btn.onclick = closeAllModals;
+    });
 
     // Close modal when clicking outside of it
     window.onclick = function(event) {
-        if (event.target === modal) {
-            modal.style.display = 'none';
-            clearInterval(qrTimer);
+        if (event.target === walletModal || event.target === errorModal) {
+            closeAllModals();
         }
     };
 });
