@@ -415,3 +415,22 @@ body {
 .timeline-item.muted::before {
     background-color: #939393;
 }
+
+/* Valid block containing From and Until */
+.valid {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.valid .valid-from,
+.valid .valid-until {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 8px 12px;
+    background-color: #f6f0f9;
+    border-radius: 6px;
+    text-align: center;
+}
